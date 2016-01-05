@@ -1,0 +1,123 @@
+/*!@license Copyright (c) 2015 Cesar Candela
+* www.cssguy4hire.com 
+*/
+
+// DEFAULT FUNCTIONS AND MIXNINS
+@import 'functions';
+@import 'mixins';
+
+// setup
+@import 'setup';
+
+// DEFAULT STYLES
+@import 'default';
+
+// LAYOUT
+@import 'layout';
+
+/*////////////////////////////////*/
+/*////////////ELEMENTS////////////*/
+/*////////////////////////////////*/
+
+// HEADER
+@import 'header';
+
+// FOOTER
+@import 'footer'; 
+
+
+/*list*/
+
+//center in textLine
+@function centerInLine($f_size, $f_lHeight, $box_height) {
+    
+    // get text middle
+    $textMiddle: ($f_size * $f_lHeight) / 2;
+
+    // get box middle
+    $boxMiddle: $box_height / 2;
+
+    @return ($textMiddle - $boxMiddle);
+}
+
+
+ul {
+
+    $local_fSize: 1em;
+    $local_lHeight: 1.1;
+    
+    //bullet
+    $bulletWidth: 0.5em;
+    $bulletHeight: $bulletWidth;
+    $bullet_radius: $bulletWidth / 2;
+    $bullet_gap: 2px;
+    $bullet_color: lighten($fColor_default, 15%);
+
+
+    padding-bottom: 10px;
+    transition: font-size 300ms linear 0ms;
+
+    // list item
+    li {
+        padding: 
+            0
+            0
+            4px
+            calc(#{$bulletWidth} + #{$bullet_gap})
+        ;
+        font-size: $local_fSize;
+        line-height: $local_lHeight;
+        position: relative;
+
+        &:before {
+            content: "";
+            left: 0;
+            width: $bulletWidth;
+            height: $bulletHeight;
+            border-radius: $bullet_radius;
+            display: block;
+            position: absolute;
+            box-sizing: border-box;
+            background-color: $bullet_color;
+
+            //center in textLine
+            top: centerInLine($local_fSize, $local_lHeight, $bulletHeight);
+
+        }
+
+    }
+
+    ul {
+        padding-top: 7px;
+    }
+
+    li li {
+        
+        $local_fSize: 0.86em;
+        $bulletWidth: 0.35em;
+        $bullet_color: lighten($bullet_color, 5%);
+
+        padding-left: calc(#{$bulletWidth} + #{$bullet_gap});
+        font-size: $local_fSize;
+
+        &:before {
+            width: 0;
+            height: 0;
+            border-left: $bulletWidth solid $bullet_color;
+            border-bottom: $bulletWidth solid transparent;
+            border-top: $bulletWidth solid transparent;
+            border-radius: 0;
+            box-sizing: content-box;
+            background-color: transparent;
+
+            //center in textLine
+            top: centerInLine($local_fSize, $local_lHeight, $bulletHeight);
+
+        }
+
+    }
+
+}
+
+
+
